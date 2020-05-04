@@ -1,0 +1,145 @@
+{
+    "title": "enfore",
+    "description": "universal connector for enfore",
+    "docsUrl": "",
+    "buildType":"docker",
+    "credentials": {
+        "fields": {
+            "serverBaseUrl": {
+                "label": "Server Base URL",
+                "viewClass": "TextFieldView",
+                "required": true
+            },
+            "useDefaultAuth": {
+                "viewClass": "CheckBoxView",
+                "label": "Use the default Auth server",
+                "required": false
+            },
+            "serverAuthCustom": {
+                "label": "Custom Auth Server URL",
+                "viewClass": "TextFieldView",
+                "required": false
+            },
+            "useDefaultErp": {
+                "viewClass": "CheckBoxView",
+                "label": "Use the default ERP server",
+                "required": false
+            },
+            "serverErpCustom": {
+                "label": "Custom ERP Server URL",
+                "viewClass": "TextFieldView",
+                "required": false
+            },
+            "useDefaultContacts": {
+                "viewClass": "CheckBoxView",
+                "label": "Use the default Contacts server",
+                "required": false
+            },
+            "serverContactsCustom": {
+                "label": "Custom Contacts Server URL",
+                "viewClass": "TextFieldView",
+                "required": false
+            },
+            "userName": {
+                "label": "Your username",
+                "viewClass": "TextFieldView",
+                "placeholder": "my name",
+                "required": true
+            },
+            "password": {
+                "label": "Your password",
+                "viewClass": "PasswordFieldView",
+                "placeholder": "my password",
+                "required": true
+            },
+            "authOrgId": {
+                "label": "Auth OrgId for testing",
+                "viewClass": "TextFieldView",
+                "required": true
+            }
+        }
+    },
+    "triggers": {
+    },
+    "actions": {
+        "getIndividual": {
+            "title": "Return individual contacts",
+            "main": "./lib/actions/getIndividual.js",
+            "description": "Load all individual contacts from an organisation",
+            "fields": {
+                "verbose": {
+                    "order": 10,
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                },
+                "getFullSet": {
+                    "order": 9,
+                    "viewClass": "CheckBoxView",
+                    "label": "getFullSet - get all individual contacts - otherwise only one request for the limit"
+                },
+                "limit": {
+                    "order": 8,
+                    "label": "Limit:\nNumber of objects to be returned per page",
+                    "required": false,
+                    "viewClass": "TextFieldWithNoteView",
+                    "placeholder": 1000,
+                    "note": "Defaults and Maximum to 1000"
+                },
+                "offset": {
+                    "order": 7,
+                    "viewClass": "TextFieldWithNoteView",
+                    "label": "Offset:\nSkip the offset objects before beginning to return the objects",
+                    "required": false,
+                    "placeholder": 0,
+                    "note": "Defaults to 0"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getIndividual.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getInvoices": {
+            "order": 10,
+            "title": "Return invoices",
+            "main": "./lib/actions/getInvoices.js",
+            "description": "Returns invoices for the specified interval, sorted in ascending order by transaction date and time.\n<br><br>\n<strong>\nSince our platform was built as a distributed system, we are subject to the laws of the \"Eventual consistency\" model. This means that time periods close to the present may be unstable and could contain new items if the same time interval is queried again.\n<br><br>\nWe therefore recommend that intervals that are close to the present time should be re-requested and verified at a later time.\n</strong>\n",
+            "fields": {
+                "verbose": {
+                    "order": 10,
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                },
+                "getFullSet": {
+                    "order": 9,
+                    "viewClass": "CheckBoxView",
+                    "label": "getFullSet - get all invoices for the request period of time - otherwise only one request for the limit"
+                },
+                "limit": {
+                    "order": 8,
+                    "viewClass": "TextFieldWithNoteView",
+                    "label": "Limit:\nNumber of objects to be returned per data-day-set",
+                    "required": false,
+                    "placeholder": 200,
+                    "note": "Defaults and Maximum to 200"
+                },
+                "offset": {
+                    "order": 7,
+                    "viewClass": "TextFieldWithNoteView",
+                    "label": "Offset:\nSkip the offset objects before beginning to return the objects",
+                    "required": false,
+                    "placeholder": 0,
+                    "note": "Default is 0"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getInvoices.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "type": "object",
+    "properties": {
+        "org_id": {
+            "title": "org_id",
+            "type": "string",
+            "required": true,
+            "order": 2
+        },
+        "from": {
+            "title": "from",
+            "type": "string",
+            "required": true,
+            "order": 1
+        },
+        "to": {
+            "title": "to",
+            "type": "string",
+            "required": true,
+            "order": 0
+        }
+    }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "enfore",
+  "version": "0.1.0",
+  "description": "enfore universal connector",
+  "main": "component.json",
+  "engines": {
+    "node": ">=12.11.0",
+    "npm": ">=6.0.0"
+  },
+  "scripts": {
+    "test": "exit 0"
+  },
+  "keywords": [
+    "enfore"
+  ],
+  "author": "mVISE AG",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "base-64": "^0.1.0",
+    "elasticio-node": "^0.0.9",
+    "elasticio-sailor-nodejs": "^2.6.5"
+  }
+}
