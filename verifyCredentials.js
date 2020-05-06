@@ -1,3 +1,11 @@
+/**
+ * flowground :- mVISE iPaaS / enforce-universal-connector
+ * Copyright © 2020, mVISE AG
+ * contact: info@mvise.de
+ *
+ * All files of this connector are licensed under the Apache 2.0 License. For details
+ * see the file LICENSE on the top-level directory.
+*/
 
 const { requestVerification, } = require('./lib/services/request-verification');
 
@@ -10,7 +18,7 @@ module.exports = async function verify(credentials, cb) {
                 userName,
                 password,
                 authOrgId, } = credentials;
-        
+
         const options = {
             method: 'verify-credentials',
         };
@@ -18,7 +26,7 @@ module.exports = async function verify(credentials, cb) {
         if (!serverBaseUrl) throw new Error('Server Base Url is missing');
         if (!userName) throw new Error('User Name is missing');
         if (!password) throw new Error('Password is missing');
-        if (!authOrgId) throw new Error('OrgId is missing');   
+        if (!authOrgId) throw new Error('OrgId is missing');
         if (useDefaultAuth === false && !serverAuthCustom) throw new Error('Custom Server Auth URL is missing');
 
         const res = await requestVerification.call(this, {}, credentials, {}, options);
@@ -27,7 +35,7 @@ module.exports = async function verify(credentials, cb) {
         await this.logger.info('---Credentials for verification %j', logCredentials);
         await this.logger.info('---Options: %j', options);
         await this.logger.info('---Verification response: %j', res);
-        
+
         cb(null, { verified: true });
     } catch (e) {
         await this.logger.error('Credentials catch passed for verification %j', logCredentials);
